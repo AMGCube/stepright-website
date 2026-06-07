@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stepright Flooring | Premium SPC Flooring Australia</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #020e1f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,120,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,120,255,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,100,255,0.1) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .corner {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-color: rgba(0,120,255,0.25);
+      border-style: solid;
+    }
+    .corner-tl { top: 24px; left: 24px; border-width: 1px 0 0 1px; }
+    .corner-tr { top: 24px; right: 24px; border-width: 1px 1px 0 0; }
+    .corner-bl { bottom: 24px; left: 24px; border-width: 0 0 1px 1px; }
+    .corner-br { bottom: 24px; right: 24px; border-width: 0 1px 1px 0; }
+
+    .dot-grid {
+      position: fixed;
+      bottom: 80px;
+      right: 60px;
+      display: grid;
+      grid-template-columns: repeat(5, 6px);
+      gap: 8px;
+      opacity: 0.2;
+    }
+    .dot-grid span {
+      width: 2px;
+      height: 2px;
+      background: #2979ff;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .badge {
+      background: rgba(0,100,255,0.12);
+      border: 0.5px solid rgba(0,120,255,0.3);
+      color: #60a5fa;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .logo-main {
+      font-size: clamp(48px, 10vw, 80px);
+      font-weight: 500;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: #ffffff;
+    }
+    .logo-main span { color: #2979ff; }
+
+    .logo-sub {
+      font-size: 16px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 10px;
+    }
+
+    .scan-line {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #2979ff, transparent);
+      margin: 2rem auto;
+      animation: scan 3s ease-in-out infinite;
+    }
+    @keyframes scan {
+      0%, 100% { opacity: 0.3; width: 100px; }
+      50% { opacity: 1; width: 300px; }
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      max-width: 380px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item:hover { color: rgba(255,255,255,0.7); }
+    .contact-item i { color: #2979ff; font-size: 16px; }
+
+    .status-bar {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #2979ff;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+    .status-text {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="dot-grid">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="content">
+    <div class="badge">Premium SPC Flooring</div>
+
+    <div class="logo-main">Step<span>right</span></div>
+    <div class="logo-sub">Flooring</div>
+
+    <div class="scan-line"></div>
+
+    <p class="tagline">
+      Engineered for Australian homes.<br>Built to last a lifetime.
+    </p>
+
+    <div class="contact-row">
+      <a class="contact-item" href="tel:+61700000000">
+        <i class="ti ti-phone"></i>
+        +61 7 0000 0000
+      </a>
+      <a class="contact-item" href="mailto:hello@steprightflooring.com.au">
+        <i class="ti ti-mail"></i>
+        hello@steprightflooring.com.au
+      </a>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-dot"></div>
+    <div class="status-text">Website coming soon</div>
+  </div>
+
+</body>
+</html>
