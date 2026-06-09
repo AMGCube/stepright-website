@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orders — Stepright Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #020e1f;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,120,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,120,255,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: rgba(2,14,31,0.96);
+      border-bottom: 0.5px solid rgba(0,120,255,0.18);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 14px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -0.4px; flex-shrink: 0; }
+    .nav-logo span { color: #2979ff; }
+
+    .nav-sep { width: 1px; height: 18px; background: rgba(0,120,255,0.18); flex-shrink: 0; }
+
+    .nav-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      flex: 1;
+    }
+
+    .nav-user {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .nav-btn {
+      background: rgba(0,0,0,0.28);
+      border: 0.5px solid rgba(0,120,255,0.18);
+      border-radius: 3px;
+      color: rgba(255,255,255,0.4);
+      font-family: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .nav-btn:hover { border-color: rgba(0,120,255,0.45); color: rgba(255,255,255,0.75); }
+
+    /* ── Main ── */
+    .main {
+      position: relative;
+      z-index: 2;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 76px 20px 64px;
+    }
+
+    /* ── Stats ── */
+    .stats-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: rgba(0,14,40,0.55);
+      border: 0.5px solid rgba(0,120,255,0.14);
+      border-radius: 4px;
+      padding: 12px 20px;
+      min-width: 100px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-top: 5px;
+    }
+
+    /* ── Filters ── */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-right: 2px;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 0.5px solid rgba(0,120,255,0.14);
+      border-radius: 100px;
+      color: rgba(255,255,255,0.35);
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: rgba(0,120,255,0.4); color: rgba(255,255,255,0.7); }
+    .filter-btn.active {
+      background: rgba(41,121,255,0.12);
+      border-color: rgba(41,121,255,0.45);
+      color: #60a5fa;
+    }
+
+    .spacer { flex: 1; }
+
+    .refresh-btn {
+      background: transparent;
+      border: 0.5px solid rgba(0,120,255,0.14);
+      border-radius: 3px;
+      color: rgba(255,255,255,0.3);
+      font-family: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .refresh-btn:hover { border-color: rgba(0,120,255,0.4); color: rgba(255,255,255,0.65); }
+
+    /* ── Order Cards ── */
+    .orders-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .order-card {
+      background: rgba(0,14,40,0.55);
+      border: 0.5px solid rgba(0,120,255,0.14);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+    .order-card:hover { border-color: rgba(0,120,255,0.25); }
+    .order-card.expanded { border-color: rgba(0,120,255,0.3); }
+
+    .order-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+      flex-wrap: wrap;
+    }
+    .order-header:hover { background: rgba(0,120,255,0.03); }
+
+    .order-no {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #60a5fa;
+      letter-spacing: 0.04em;
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    .order-date {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* items count badge in header */
+    .order-items-count {
+      font-size: 11px;
+      color: rgba(255,255,255,0.22);
+      flex: 1;
+    }
+
+    .order-notes-preview {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      font-style: italic;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .status-badge {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .badge-pending {
+      background: rgba(251,191,36,0.1);
+      border: 0.5px solid rgba(251,191,36,0.3);
+      color: #fbbf24;
+    }
+    .badge-sent {
+      background: rgba(74,222,128,0.1);
+      border: 0.5px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+    }
+
+    .send-btn {
+      background: rgba(41,121,255,0.1);
+      border: 0.5px solid rgba(41,121,255,0.35);
+      border-radius: 3px;
+      color: #60a5fa;
+      font-family: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      cursor: pointer;
+      transition: all 0.18s;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .send-btn:hover:not(:disabled) {
+      background: rgba(41,121,255,0.2);
+      border-color: rgba(41,121,255,0.65);
+      color: #fff;
+    }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .expand-icon {
+      font-size: 11px;
+      color: rgba(255,255,255,0.18);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 2px;
+    }
+    .order-card.expanded .expand-icon { transform: rotate(180deg); }
+
+    /* ── Order Body (expanded) ── */
+    .order-body {
+      display: none;
+      border-top: 0.5px solid rgba(0,120,255,0.1);
+      padding: 14px 16px;
+    }
+    .order-card.expanded .order-body { display: block; }
+
+    .order-notes-full {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid rgba(0,120,255,0.06);
+    }
+
+    /* ── Items Table ── */
+    .items-table { width: 100%; border-collapse: collapse; }
+
+    .items-table th {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      font-weight: 400;
+      text-align: left;
+      padding: 5px 10px 8px;
+      border-bottom: 0.5px solid rgba(0,120,255,0.08);
+    }
+
+    .items-table td {
+      padding: 7px 10px;
+      font-size: 13px;
+      border-bottom: 0.5px solid rgba(0,120,255,0.04);
+      vertical-align: middle;
+    }
+    .items-table tr:last-child td { border-bottom: none; }
+    .items-table tbody tr:hover td { background: rgba(0,120,255,0.03); }
+
+    .item-code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      white-space: nowrap;
+    }
+    .item-name { color: rgba(255,255,255,0.8); }
+    .item-qty { font-weight: 500; color: #60a5fa; text-align: right; white-space: nowrap; }
+    .item-unit { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+    .sent-info {
+      font-size: 11px;
+      color: rgba(74,222,128,0.55);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 0.5px solid rgba(0,120,255,0.06);
+    }
+
+    /* ── States ── */
+    .state-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 24px 16px;
+      color: rgba(255,255,255,0.28);
+      font-size: 13px;
+    }
+
+    .spin-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #2979ff;
+      flex-shrink: 0;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <nav class="navbar">
+    <div class="nav-logo">Step<span>right</span></div>
+    <div class="nav-sep"></div>
+    <div class="nav-title">Order Admin</div>
+    <div class="nav-user" id="navUser"></div>
+    <a href="order.html" class="nav-btn">New Order</a>
+    <button class="nav-btn" id="logoutBtn">Sign Out</button>
+  </nav>
+
+  <main class="main">
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-label">Total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statPending" style="color:#fbbf24">—</div>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statSent" style="color:#4ade80">—</div>
+        <div class="stat-label">Sent</div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">Filter</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="pending">Pending</button>
+      <button class="filter-btn" data-filter="sent">Sent</button>
+      <div class="spacer"></div>
+      <button class="refresh-btn" id="refreshBtn">↺ Refresh</button>
+    </div>
+
+    <div id="ordersList">
+      <div class="state-panel"><div class="spin-dot"></div> Loading orders…</div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://aslejjaezqswslogzbov.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_Q43ZT9JVWjNuHM92pez07g_XKT2P-hW';
+    const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    /* ── Auth gate ── */
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) window.location.replace('login.html');
+
+    document.getElementById('navUser').textContent = session.user.email;
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await db.auth.signOut();
+      window.location.replace('login.html');
+    });
+
+    /* ── Helpers ── */
+    function esc(v) {
+      return String(v ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;')
+                            .replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-AU', { day:'2-digit', month:'short', year:'numeric' })
+        + ' ' + d.toLocaleTimeString('en-AU', { hour:'2-digit', minute:'2-digit' });
+    }
+
+    /* ── State ── */
+    let allOrders    = [];
+    let activeFilter = 'all';
+
+    /* ── Load all orders + items ── */
+    async function loadOrders() {
+      document.getElementById('ordersList').innerHTML =
+        '<div class="state-panel"><div class="spin-dot"></div> Loading orders…</div>';
+
+      // orders fields: id (bigint), created_at, order_no, created_by, status, notes, sent_at
+      const { data: orders, error: oErr } = await db
+        .from('orders')
+        .select('id, created_at, order_no, created_by, status, notes, sent_at')
+        .order('created_at', { ascending: false })
+        .limit(200);
+
+      if (oErr) {
+        document.getElementById('ordersList').innerHTML =
+          `<div class="state-panel">${esc(oErr.message)}</div>`;
+        return;
+      }
+
+      if (!orders?.length) {
+        allOrders = [];
+        updateStats();
+        document.getElementById('ordersList').innerHTML =
+          '<div class="state-panel">No orders yet.</div>';
+        return;
+      }
+
+      // order_items fields: id (bigint), order_id (bigint), sku_code, sku_name, unit, quantity
+      const { data: items, error: iErr } = await db
+        .from('order_items')
+        .select('id, order_id, sku_code, sku_name, unit, quantity')
+        .in('order_id', orders.map(o => o.id));
+
+      if (iErr) {
+        document.getElementById('ordersList').innerHTML =
+          `<div class="state-panel">${esc(iErr.message)}</div>`;
+        return;
+      }
+
+      allOrders = orders.map(o => ({
+        ...o,
+        items: (items || []).filter(i => i.order_id === o.id)
+      }));
+
+      updateStats();
+      renderOrders();
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent   = allOrders.length;
+      document.getElementById('statPending').textContent = allOrders.filter(o => o.status === 'pending').length;
+      document.getElementById('statSent').textContent    = allOrders.filter(o => o.status === 'sent').length;
+    }
+
+    /* ── Render order list ── */
+    function renderOrders() {
+      const listEl   = document.getElementById('ordersList');
+      const filtered = activeFilter === 'all'
+        ? allOrders
+        : allOrders.filter(o => o.status === activeFilter);
+
+      if (!filtered.length) {
+        listEl.innerHTML = `<div class="state-panel">No ${activeFilter !== 'all' ? activeFilter + ' ' : ''}orders found.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = '';
+      const wrap = document.createElement('div');
+      wrap.className = 'orders-list';
+
+      filtered.forEach(order => {
+        const card = document.createElement('div');
+        card.className = 'order-card';
+
+        const isPending    = order.status === 'pending';
+        const badgeClass   = isPending ? 'badge-pending' : 'badge-sent';
+        const itemCount    = order.items.length;
+        const totalQty     = order.items.reduce((s, i) => s + (i.quantity || 0), 0);
+
+        const itemRows = order.items.map(item => `
+          <tr>
+            <td class="item-code">${esc(item.sku_code)}</td>
+            <td class="item-name">${esc(item.sku_name)}</td>
+            <td class="item-qty">${item.quantity}</td>
+            <td class="item-unit">${esc(item.unit)}</td>
+          </tr>`).join('') || `
+          <tr><td colspan="4" style="color:rgba(255,255,255,0.2);padding:10px 10px">No items</td></tr>`;
+
+        const sentInfo = order.status === 'sent' && order.sent_at
+          ? `<div class="sent-info">Sent to warehouse: ${fmtDate(order.sent_at)}</div>`
+          : '';
+
+        card.innerHTML = `
+          <div class="order-header">
+            <div class="order-no">${esc(order.order_no)}</div>
+            <div class="order-items-count">${itemCount} SKU${itemCount !== 1 ? 's' : ''} · ${totalQty} units</div>
+            ${order.notes ? `<div class="order-notes-preview">${esc(order.notes)}</div>` : ''}
+            <div class="order-date">${fmtDate(order.created_at)}</div>
+            <span class="status-badge ${badgeClass}">${esc(order.status)}</span>
+            ${isPending ? `<button class="send-btn">Send to Warehouse</button>` : ''}
+            <span class="expand-icon">▾</span>
+          </div>
+          <div class="order-body">
+            ${order.notes ? `<div class="order-notes-full">Notes: ${esc(order.notes)}</div>` : ''}
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>SKU Code</th>
+                  <th>Product Name</th>
+                  <th style="text-align:right">Qty</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>${itemRows}</tbody>
+            </table>
+            ${sentInfo}
+          </div>`;
+
+        /* Toggle expand on header (but not on send button) */
+        card.querySelector('.order-header').addEventListener('click', (e) => {
+          if (e.target.closest('.send-btn')) return;
+          card.classList.toggle('expanded');
+        });
+
+        /* Send to warehouse */
+        const sendBtn = card.querySelector('.send-btn');
+        if (sendBtn) {
+          sendBtn.addEventListener('click', () => markSent(order.id, sendBtn));
+        }
+
+        wrap.appendChild(card);
+      });
+
+      listEl.appendChild(wrap);
+    }
+
+    /* ── Mark order as sent ── */
+    async function markSent(orderId, btn) {
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+
+      const { error } = await db
+        .from('orders')
+        .update({ status: 'sent', sent_at: new Date().toISOString() })
+        .eq('id', orderId);
+
+      if (error) {
+        btn.disabled    = false;
+        btn.textContent = 'Send to Warehouse';
+        alert(`Failed: ${error.message}`);
+        return;
+      }
+
+      // TODO: trigger warehouse email notification here
+
+      // Update local state and re-render
+      const order = allOrders.find(o => o.id === orderId);
+      if (order) {
+        order.status  = 'sent';
+        order.sent_at = new Date().toISOString();
+      }
+      updateStats();
+      renderOrders();
+    }
+
+    /* ── Filter buttons ── */
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderOrders();
+      });
+    });
+
+    /* ── Refresh ── */
+    document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+
+    /* ── Init ── */
+    await loadOrders();
+  </script>
+</body>
+</html>
