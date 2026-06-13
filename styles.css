@@ -21,6 +21,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 110px;
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -47,16 +51,19 @@ button {
 
 .site-header {
   position: fixed;
-  top: 0;
+  top: 12px;
   left: 50%;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: var(--page);
+  width: min(1180px, calc(100% - 28px));
   transform: translateX(-50%);
-  padding: 18px 0;
-  color: #fff;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 36px rgba(8, 46, 86, 0.1);
+  color: var(--ink);
+  backdrop-filter: blur(16px);
   transition:
     background 180ms ease,
     box-shadow 180ms ease,
@@ -66,16 +73,7 @@ button {
 
 .site-header.scrolled,
 .site-header.open {
-  top: 12px;
-  width: min(1180px, calc(100% - 28px));
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-right: 18px;
-  padding-left: 18px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 12px 36px rgba(8, 46, 86, 0.1);
-  color: var(--ink);
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .brand {
@@ -195,21 +193,22 @@ p {
 .hero h1 {
   max-width: 720px;
   margin-bottom: 14px;
-  font-size: clamp(48px, 6.1vw, 82px);
-  line-height: 0.96;
+  font-size: clamp(42px, 4.4vw, 64px);
+  line-height: 1.02;
 }
 
 .hero-line {
   margin-bottom: 22px;
   color: var(--yellow);
-  font-size: clamp(25px, 3.2vw, 42px);
+  font-size: clamp(22px, 2.4vw, 34px);
   font-weight: 800;
 }
 
 .hero-copy {
   max-width: 600px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(17px, 2vw, 21px);
+  font-size: clamp(16px, 1.45vw, 19px);
+  line-height: 1.65;
 }
 
 .hero-actions {
@@ -278,7 +277,8 @@ p {
   display: block;
   color: var(--yellow);
   font-size: 34px;
-  line-height: 1;
+  line-height: 1.08;
+  letter-spacing: 0;
 }
 
 .spec-strip span {
@@ -291,11 +291,11 @@ p {
 .section-pad {
   width: var(--page);
   margin: 0 auto;
-  padding: clamp(64px, 9vw, 112px) 0;
+  padding: clamp(52px, 6vw, 76px) 0;
 }
 
 .intro {
-  margin-top: clamp(44px, 7vw, 84px);
+  margin-top: 0;
   background: transparent;
 }
 
@@ -305,8 +305,9 @@ p {
 .trade h2,
 .contact h2 {
   margin-bottom: 18px;
-  font-size: clamp(34px, 5vw, 62px);
-  line-height: 1;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.08;
+  letter-spacing: 0;
 }
 
 .intro > p,
@@ -316,7 +317,8 @@ p {
 .contact p {
   max-width: 820px;
   color: var(--muted);
-  font-size: clamp(16px, 1.65vw, 20px);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.7;
 }
 
 .intro .section-kicker,
@@ -332,15 +334,14 @@ p {
 .focus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  margin-top: 36px;
-  border: 1px solid var(--line);
-  background: var(--line);
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .focus-grid article {
+  border: 1px solid var(--line);
   background: #fff;
-  padding: 28px;
+  padding: 24px;
 }
 
 .focus-grid span {
@@ -352,8 +353,9 @@ p {
 .thickness-card h3,
 .colour-card h3,
 .benefit-grid h3 {
-  margin: 20px 0 10px;
-  font-size: 22px;
+  margin: 16px 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
 }
 
 .focus-grid p,
@@ -368,8 +370,8 @@ p {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 28px;
-  margin-bottom: 34px;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
 .section-heading > p {
@@ -387,7 +389,7 @@ p {
 }
 
 .thickness-card {
-  min-height: 360px;
+  min-height: 300px;
   border: 1px solid var(--line);
   background: var(--surface);
   padding: clamp(26px, 4vw, 42px);
@@ -405,7 +407,7 @@ p {
 
 .measurement {
   color: var(--blue);
-  font-size: clamp(78px, 10vw, 128px);
+  font-size: clamp(64px, 7.5vw, 98px);
   font-weight: 950;
   line-height: 0.9;
 }
@@ -436,7 +438,7 @@ p {
 
 .swatch {
   display: block;
-  min-height: 170px;
+  min-height: 150px;
   border: 1px solid rgba(24, 36, 53, 0.08);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 20%, rgba(0, 0, 0, 0.08) 54%, transparent 80%),
@@ -485,15 +487,14 @@ p {
 .benefit-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.16);
+  gap: 14px;
 }
 
 .benefit-grid article {
-  min-height: 240px;
-  background: var(--blue-deep);
-  padding: 26px;
+  min-height: 205px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 24px;
 }
 
 .benefit-icon {
@@ -513,14 +514,14 @@ p {
 }
 
 .space-feature {
-  min-height: 620px;
+  min-height: 520px;
   overflow: hidden;
 }
 
 .space-feature img {
   width: 100%;
   height: 100%;
-  min-height: 620px;
+  min-height: 520px;
   object-fit: cover;
 }
 
@@ -532,7 +533,7 @@ p {
 .space-list article {
   border: 1px solid var(--line);
   background: var(--surface);
-  padding: 28px;
+  padding: 24px;
 }
 
 .space-list span,
@@ -544,7 +545,7 @@ p {
 .quality {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
-  gap: clamp(28px, 7vw, 88px);
+  gap: clamp(28px, 5vw, 64px);
   background: transparent;
 }
 
@@ -580,7 +581,7 @@ p {
 .contact {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
-  gap: clamp(28px, 7vw, 88px);
+  gap: clamp(28px, 5vw, 64px);
   background: transparent;
 }
 
@@ -593,7 +594,7 @@ p {
 
 .contact-panel h3 {
   margin-bottom: 12px;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .contact-panel p {
