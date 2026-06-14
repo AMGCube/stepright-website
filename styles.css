@@ -438,36 +438,22 @@ p {
 
 .swatch {
   display: block;
-  min-height: 150px;
+  width: 100%;
+  height: 150px;
   border: 1px solid rgba(24, 36, 53, 0.08);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 20%, rgba(0, 0, 0, 0.08) 54%, transparent 80%),
-    var(--tone);
+  background: #f3f0ea;
+  object-fit: cover;
+  object-position: center;
 }
 
-.warm-oak {
-  --tone: linear-gradient(135deg, #b98753, #d5b17f, #8e633e);
+.colour-name {
+  margin-top: -4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.natural-oak {
-  --tone: linear-gradient(135deg, #c99a61, #e0c08c, #a97545);
-}
-
-.coastal-grey {
-  --tone: linear-gradient(135deg, #8d9698, #c0c5c2, #707b7e);
-}
-
-.soft-beige {
-  --tone: linear-gradient(135deg, #c8ad87, #e4d1b4, #a78e70);
-}
-
-.smoked-oak {
-  --tone: linear-gradient(135deg, #5f554c, #8a7a68, #3f3935);
-}
-
-.classic-brown {
-  --tone: linear-gradient(135deg, #6f452e, #9b6c45, #4c3022);
-}
 
 .benefits {
   width: 100%;
@@ -501,10 +487,13 @@ p {
   display: grid;
   width: 44px;
   height: 44px;
+  margin-bottom: 6px;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.28);
   color: var(--yellow);
+  font-size: 20px;
   font-weight: 950;
+  line-height: 1;
 }
 
 .space-layout {
@@ -924,7 +913,7 @@ p {
   }
 
   .swatch {
-    min-height: 96px;
+    height: 104px;
   }
 
   .colour-card h3 {
