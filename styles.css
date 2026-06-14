@@ -841,34 +841,34 @@ p {
   }
 
   .hero {
-    margin-top: 8px;
-    padding-top: 70px;
+    margin-top: 6px;
+    padding-top: 62px;
   }
 
   .hero-brand-block {
-    padding: 34px 20px 30px;
+    padding: 28px 18px 24px;
   }
 
   .hero h1 {
-    font-size: clamp(38px, 11vw, 46px);
-    line-height: 1.04;
+    font-size: clamp(36px, 10.4vw, 44px);
+    line-height: 1.03;
   }
 
   .hero-line {
-    margin-bottom: 18px;
-    font-size: 22px;
+    margin-bottom: 14px;
+    font-size: 20px;
   }
 
   .hero-copy {
-    font-size: 15.5px;
-    line-height: 1.58;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .hero-actions {
     display: grid;
-    width: min(240px, 100%);
-    gap: 10px;
-    margin-top: 28px;
+    width: min(280px, 100%);
+    gap: 9px;
+    margin-top: 22px;
   }
 
   .button {
@@ -886,7 +886,7 @@ p {
   }
 
   .hero-product-block img {
-    height: 260px;
+    height: 228px;
     object-position: center;
   }
 
@@ -919,12 +919,12 @@ p {
   }
 
   .section-pad {
-    padding: 42px 0;
+    padding: 36px 0;
   }
 
   .section-heading {
-    gap: 12px;
-    margin-bottom: 22px;
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
   .intro h2,
@@ -946,9 +946,12 @@ p {
   }
 
   .focus-grid,
-  .thickness-grid,
-  .benefit-grid {
+  .thickness-grid {
     grid-template-columns: 1fr;
+  }
+
+  .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .focus-grid,
@@ -961,12 +964,12 @@ p {
 
   .focus-grid article,
   .space-list article {
-    padding: 20px;
+    padding: 18px;
   }
 
   .thickness-card {
     min-height: 0;
-    padding: 24px;
+    padding: 22px;
   }
 
   .measurement {
@@ -979,7 +982,14 @@ p {
   }
 
   .colour-card {
+    display: flex;
+    min-height: 240px;
+    flex-direction: column;
     padding: 10px;
+  }
+
+  .colour-card p {
+    margin-top: auto;
   }
 
   .swatch {
@@ -992,7 +1002,7 @@ p {
 
   .colour-card p {
     font-size: 14px;
-    line-height: 1.45;
+    line-height: 1.42;
   }
 
   .benefits {
@@ -1001,14 +1011,30 @@ p {
   }
 
   .benefit-grid article {
-    min-height: 0;
-    padding: 20px;
+    min-height: 168px;
+    padding: 16px;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .benefit-grid h3 {
+    margin-top: 14px;
+    font-size: 17px;
+  }
+
+  .benefit-grid p {
+    font-size: 14px;
+    line-height: 1.42;
   }
 
   .space-feature,
   .space-feature img {
     min-height: 0;
-    height: 280px;
+    height: 248px;
   }
 
   .quality,
@@ -1026,7 +1052,8 @@ p {
   }
 
   .dealer-panel {
-    padding: 18px;
+    gap: 12px;
+    padding: 16px;
   }
 
   .contact-actions {
