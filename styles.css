@@ -79,19 +79,7 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   min-width: 0;
-}
-
-.brand-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 2px solid currentColor;
-  color: inherit;
-  font-weight: 900;
-  letter-spacing: 0;
 }
 
 .brand strong,
@@ -100,12 +88,21 @@ button {
 }
 
 .brand strong {
-  font-size: 18px;
+  color: var(--blue-deep);
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.05;
 }
 
 .brand small {
+  margin-top: 3px;
+  color: var(--muted);
   font-size: 11px;
-  opacity: 0.72;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .site-nav {
@@ -598,6 +595,12 @@ p {
   border-color: rgba(24, 57, 87, 0.4);
 }
 
+.contact-phone-note {
+  margin-top: 12px;
+  color: #64758a;
+  font-size: 14px;
+}
+
 .dealer-panel {
   display: grid;
   gap: 14px;
@@ -626,6 +629,14 @@ p {
   margin-bottom: 9px;
   font-size: 21px;
   line-height: 1.2;
+}
+
+.dealer-card p {
+  margin-bottom: 9px;
+  color: #64758a;
+  font-size: 15px;
+  font-weight: 560;
+  line-height: 1.5;
 }
 
 .dealer-site {
@@ -818,21 +829,12 @@ p {
     padding: 10px 12px;
   }
 
-  .brand {
-    gap: 10px;
-  }
-
-  .brand-mark {
-    width: 38px;
-    height: 38px;
-  }
-
   .brand strong {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .brand small {
-    display: none;
+    font-size: 10px;
   }
 
   .nav-toggle {
