@@ -273,7 +273,7 @@ p {
 .spec-strip strong {
   display: block;
   color: var(--yellow);
-  font-size: 34px;
+  font-size: clamp(19px, 2vw, 26px);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -601,6 +601,13 @@ p {
   font-size: 14px;
 }
 
+.contact-phone-note a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .dealer-panel {
   display: grid;
   gap: 14px;
@@ -673,6 +680,7 @@ p {
 
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -690,6 +698,13 @@ p {
 .site-footer a {
   color: var(--yellow);
   font-weight: 850;
+}
+
+.footer-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
 }
 
 @media (max-width: 1080px) {
@@ -911,7 +926,7 @@ p {
   }
 
   .spec-strip strong {
-    font-size: 25px;
+    font-size: 18px;
   }
 
   .spec-strip span {
@@ -1086,7 +1101,7 @@ p {
   }
 
   .spec-strip strong {
-    font-size: 22px;
+    font-size: 17px;
   }
 
   .spec-strip div {
