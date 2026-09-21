@@ -133,7 +133,6 @@ button {
 .hero {
   display: grid;
   width: var(--page);
-  min-height: 680px;
   margin: 24px auto 0;
   padding-top: 76px;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
@@ -143,8 +142,8 @@ button {
 .hero-brand-block {
   display: grid;
   align-content: center;
-  min-height: 604px;
-  padding: 70px clamp(28px, 5vw, 64px);
+  min-height: 500px;
+  padding: 52px 42px;
   background:
     linear-gradient(135deg, rgba(246, 223, 32, 0.12), transparent 28%),
     var(--blue-deep);
@@ -153,7 +152,7 @@ button {
 
 .hero-product-block {
   position: relative;
-  min-height: 604px;
+  min-height: 500px;
   overflow: hidden;
   background: #fff;
 }
@@ -190,21 +189,21 @@ p {
 .hero h1 {
   max-width: 720px;
   margin-bottom: 14px;
-  font-size: clamp(42px, 4.4vw, 64px);
+  font-size: 56px;
   line-height: 1.02;
 }
 
 .hero-line {
   margin-bottom: 22px;
   color: var(--yellow);
-  font-size: clamp(22px, 2.4vw, 34px);
+  font-size: 27px;
   font-weight: 800;
 }
 
 .hero-copy {
   max-width: 600px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(16px, 1.45vw, 19px);
+  font-size: 17px;
   line-height: 1.65;
 }
 
@@ -288,7 +287,7 @@ p {
 .section-pad {
   width: var(--page);
   margin: 0 auto;
-  padding: clamp(52px, 6vw, 76px) 0;
+  padding: 54px 0;
 }
 
 .intro {
@@ -300,17 +299,17 @@ p {
 .section-heading h2,
 .contact h2 {
   margin-bottom: 18px;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: 36px;
   line-height: 1.08;
   letter-spacing: 0;
 }
 
 .intro > p,
 .section-heading > p,
-.contact p {
+.contact > div > p:not(.contact-email):not(.trade-line) {
   max-width: 820px;
   color: var(--muted);
-  font-size: clamp(16px, 1.25vw, 18px);
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -348,6 +347,7 @@ p {
 .focus-grid p,
 .colour-card p {
   color: var(--muted);
+  font-size: 15px;
 }
 
 .section-heading {
@@ -355,7 +355,7 @@ p {
   align-items: end;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .section-heading > p {
@@ -363,7 +363,7 @@ p {
 }
 
 .colours {
-  background: var(--surface);
+  background: transparent;
 }
 
 .spec-inline {
@@ -538,7 +538,6 @@ p {
   border-top: 4px solid var(--blue-deep);
   background: #fff;
   padding: clamp(22px, 3vw, 28px);
-  box-shadow: 0 22px 60px rgba(9, 31, 54, 0.08);
 }
 
 .dealer-label {
@@ -633,10 +632,10 @@ p {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-top: clamp(28px, 6vw, 72px);
-  padding: 32px max(20px, calc((100% - 1180px) / 2));
+  padding: 25px max(20px, calc((100% - 1180px) / 2));
   background: #061d34;
   color: #fff;
+  font-size: 13px;
 }
 
 .site-footer p {
@@ -882,13 +881,13 @@ p {
   .intro h2,
   .section-heading h2,
   .contact h2 {
-    font-size: clamp(27px, 8vw, 32px);
+    font-size: 29px;
     line-height: 1.12;
   }
 
   .intro > p,
   .section-heading > p,
-  .contact p {
+  .contact > div > p:not(.contact-email):not(.trade-line) {
     font-size: 15.5px;
     line-height: 1.62;
   }
@@ -962,8 +961,7 @@ p {
 
   .site-footer {
     display: grid;
-    margin-top: 28px;
-    padding: 28px 20px;
+    padding: 25px 20px;
   }
 }
 @media (max-width: 360px) {
