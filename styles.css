@@ -237,43 +237,6 @@ p {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.spec-strip {
-  position: absolute;
-  right: clamp(18px, 4vw, 46px);
-  bottom: clamp(18px, 4vw, 46px);
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(108px, 1fr));
-  width: min(560px, calc(100% - 36px));
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  background: rgba(8, 46, 86, 0.82);
-  color: #fff;
-  backdrop-filter: blur(16px);
-}
-
-.spec-strip div {
-  padding: 18px;
-}
-
-.spec-strip div + div {
-  border-left: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.spec-strip strong {
-  display: block;
-  color: var(--yellow);
-  font-size: clamp(19px, 2vw, 26px);
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-.spec-strip span {
-  display: block;
-  margin-top: 8px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 13px;
-}
-
 .section-pad {
   width: var(--page);
   margin: 0 auto;
@@ -327,7 +290,12 @@ p {
   font-weight: 950;
 }
 
-.focus-grid h3,
+.focus-grid h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
 .colour-card h3 {
   margin: 16px 0 8px;
   font-size: 20px;
@@ -437,6 +405,7 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
   gap: clamp(28px, 5vw, 64px);
+  align-items: start;
   background: transparent;
 }
 
@@ -445,10 +414,6 @@ p {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 28px;
-}
-
-.messenger-pending {
-  cursor: not-allowed;
 }
 
 .contact-actions .button {
@@ -699,34 +664,6 @@ p {
   .hero-product-block img {
     height: 228px;
     object-position: center;
-  }
-
-  .spec-strip {
-    position: static;
-    width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-color: rgba(255, 255, 255, 0.2);
-    background: var(--blue);
-    backdrop-filter: none;
-  }
-
-  .spec-strip div {
-    padding: 12px 10px;
-  }
-
-  .spec-strip div + div {
-    border-top: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .spec-strip strong {
-    font-size: 18px;
-  }
-
-  .spec-strip span {
-    margin-top: 4px;
-    font-size: 11px;
-    line-height: 1.25;
   }
 
   .section-pad {
