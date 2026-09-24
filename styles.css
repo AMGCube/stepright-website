@@ -158,11 +158,94 @@ button {
   object-fit: cover;
 }
 
+.hero-image {
+  transition: opacity 600ms ease;
+}
+
+.hero-image.is-fading {
+  opacity: 0.18;
+}
+
 .hero-product-block::after {
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(8, 46, 86, 0.32), transparent 48%);
   content: "";
+}
+
+.hero-scene-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scene-bar {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  left: auto;
+  bottom: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  color: #fff;
+  text-align: right;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 0 12px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+}
+
+.scene-name {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.scene-code {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.scene-rendered {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+.hero-scene-arrow {
+  border: 0;
+  cursor: pointer;
+}
+
+.hero-scene-arrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+  color: var(--blue-deep);
+  font-size: 26px;
+  line-height: 1;
+  opacity: 0.75;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.hero-product-block:hover .hero-scene-arrow {
+  opacity: 1;
+}
+
+.hero-scene-arrow.previous {
+  left: 16px;
+}
+
+.hero-scene-arrow.next {
+  right: 16px;
 }
 
 .eyebrow,
@@ -183,30 +266,51 @@ p {
 
 .hero h1 {
   max-width: 720px;
-  margin-bottom: 14px;
-  font-size: 56px;
-  line-height: 1.02;
+  margin-bottom: 0;
+  font-size: clamp(34px, 4.2vw, 50px);
+  line-height: 1.08;
 }
 
 .hero-line {
-  margin-bottom: 22px;
+  margin: 28px 0 0;
   color: var(--yellow);
-  font-size: 27px;
+  font-size: 16px;
   font-weight: 800;
 }
 
 .hero-copy {
-  max-width: 600px;
+  max-width: 40ch;
+  margin-top: 18px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 17px;
   line-height: 1.65;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  margin-top: 34px;
+.hero-points {
+  display: grid;
+  max-width: 440px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 22px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-points li {
+  border-left: 2px solid var(--yellow);
+  padding-left: 10px;
+}
+
+.hero-points strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+}
+
+.hero-points span {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
 }
 
 .button {
@@ -250,6 +354,7 @@ p {
 
 .intro h2,
 .section-heading h2,
+#how-to-buy h2,
 .contact h2 {
   margin-bottom: 18px;
   font-size: 36px;
@@ -272,37 +377,12 @@ p {
   color: var(--blue);
 }
 
-.focus-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.focus-grid article {
-  border: 1px solid var(--line);
-  background: #fff;
-  padding: 24px;
-}
-
-.focus-grid span {
-  color: var(--blue);
-  font-weight: 950;
-}
-
-.focus-grid h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-  line-height: 1.25;
-}
-
 .colour-card h3 {
   margin: 16px 0 8px;
   font-size: 20px;
   line-height: 1.25;
 }
 
-.focus-grid p,
 .colour-card p {
   color: var(--muted);
   font-size: 15px;
@@ -318,6 +398,13 @@ p {
 
 .section-heading > p {
   max-width: 440px;
+}
+
+.colour-lead {
+  max-width: 440px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 16px;
 }
 
 .colours {
@@ -342,8 +429,8 @@ p {
 
 .colour-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .colour-card {
@@ -381,6 +468,7 @@ p {
 
 .colour-card h3 {
   margin: 16px 6px 6px;
+  font-size: 17px;
 }
 
 .colour-name {
@@ -391,14 +479,63 @@ p {
   line-height: 1.3;
 }
 
+.colour-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 12px 6px 0;
+}
+
+.stock-link,
+.scene-link {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.scene-link {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 .fine {
   margin: 14px 0 0;
   color: var(--muted);
   font-size: 12px;
 }
 
-.process-wrap {
-  background: #e9eef4;
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.step {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 24px;
+}
+
+.step-label {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.step h3 {
+  margin: 16px 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.step p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 15px;
 }
 
 .contact {
@@ -587,6 +724,15 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .colour-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
   .section-heading {
     display: grid;
     align-items: start;
@@ -616,6 +762,10 @@ p {
     font-size: 10px;
   }
 
+  .site-nav a[href="#colours"] {
+    display: none;
+  }
+
   .hero {
     margin-top: 6px;
     padding-top: 62px;
@@ -625,26 +775,14 @@ p {
     padding: 28px 18px 24px;
   }
 
-  .hero h1 {
-    font-size: clamp(36px, 10.4vw, 44px);
-    line-height: 1.03;
-  }
-
   .hero-line {
-    margin-bottom: 14px;
-    font-size: 20px;
+    margin-top: 28px;
+    font-size: 16px;
   }
 
   .hero-copy {
     font-size: 15px;
     line-height: 1.5;
-  }
-
-  .hero-actions {
-    display: grid;
-    width: min(280px, 100%);
-    gap: 0;
-    margin-top: 22px;
   }
 
   .button {
@@ -675,8 +813,13 @@ p {
     margin-bottom: 18px;
   }
 
+  .colour-lead {
+    font-size: 15.5px;
+  }
+
   .intro h2,
   .section-heading h2,
+  #how-to-buy h2,
   .contact h2 {
     font-size: 29px;
     line-height: 1.12;
@@ -689,15 +832,6 @@ p {
     line-height: 1.62;
   }
 
-  .focus-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .focus-grid article {
-    padding: 20px;
-  }
-
   .spec-inline {
     gap: 8px 14px;
     padding: 12px 0;
@@ -705,7 +839,6 @@ p {
   }
 
   .colour-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -754,24 +887,12 @@ p {
     --page: calc(100% - 24px);
   }
 
-  .hero h1 {
-    font-size: clamp(36px, 10.8vw, 42px);
-  }
-
   .hero-brand-block {
     padding: 30px 18px 28px;
   }
 
   .hero-product-block img {
     height: 230px;
-  }
-
-  .spec-strip strong {
-    font-size: 17px;
-  }
-
-  .spec-strip div {
-    padding: 11px 8px;
   }
 
   .colour-grid {
