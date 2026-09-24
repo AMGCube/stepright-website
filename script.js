@@ -22,46 +22,48 @@ const lightboxClose = document.querySelector("[data-lightbox-close]");
 const lightboxTriggers = document.querySelectorAll("[data-lightbox]");
 let lastFocused = null;
 
-const openLightbox = (trigger) => {
-  lastFocused = trigger;
-  lightboxImage.src = trigger.getAttribute("data-lightbox-src") || "";
-  lightboxImage.alt = trigger.getAttribute("data-lightbox-alt") || "";
-  lightbox.hidden = false;
-  document.body.style.overflow = "hidden";
-  lightboxClose.focus();
-};
+if (lightbox && lightboxImage && lightboxClose) {
+  const openLightbox = (trigger) => {
+    lastFocused = trigger;
+    lightboxImage.src = trigger.getAttribute("data-lightbox-src") || "";
+    lightboxImage.alt = trigger.getAttribute("data-lightbox-alt") || "";
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    lightboxClose.focus();
+  };
 
-const closeLightbox = () => {
-  if (lightbox.hidden) {
-    return;
-  }
+  const closeLightbox = () => {
+    if (lightbox.hidden) {
+      return;
+    }
 
-  lightbox.hidden = true;
-  lightboxImage.src = "";
-  document.body.style.overflow = "";
+    lightbox.hidden = true;
+    lightboxImage.src = "";
+    document.body.style.overflow = "";
 
-  if (lastFocused) {
-    lastFocused.focus();
-  }
-};
+    if (lastFocused) {
+      lastFocused.focus();
+    }
+  };
 
-lightboxTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", () => openLightbox(trigger));
-});
+  lightboxTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => openLightbox(trigger));
+  });
 
-lightboxClose.addEventListener("click", closeLightbox);
+  lightboxClose.addEventListener("click", closeLightbox);
 
-lightbox.addEventListener("click", (event) => {
-  if (event.target === lightbox) {
-    closeLightbox();
-  }
-});
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeLightbox();
-  }
-});
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+  });
+}
 
 const heroImage = document.querySelector("[data-hero-image]");
 const heroProduct = document.querySelector(".hero-product-block");
@@ -185,4 +187,52 @@ if (HERO_SCENES.length && heroImage && heroProduct) {
   });
 
   show(0);
+}
+
+const guideQuestions = document.querySelectorAll(".q");
+
+if (guideQuestions.length) {
+  const guideCategories = document.querySelectorAll(".guide-cat");
+
+  guideQuestions.forEach((question, index) => {
+    question.querySelector(".q-n").textContent = String(index + 1).padStart(2, "0");
+  });
+
+  const showCategory = (category) => {
+    guideQuestions.forEach((question) => {
+      question.hidden = question.dataset.cat !== category;
+    });
+  };
+
+  const openQuestion = (id) => {
+    const question = document.getElementById(id);
+    if (!question || !question.classList.contains("q")) {
+      return;
+    }
+
+    showCategory(question.dataset.cat);
+    guideCategories.forEach((category) => {
+      category.classList.toggle("is-on", category.dataset.cat === question.dataset.cat);
+    });
+    question.open = true;
+    requestAnimationFrame(() => question.scrollIntoView({ block: "center", behavior: "smooth" }));
+    question.classList.add("flash");
+    window.setTimeout(() => question.classList.remove("flash"), 1500);
+  };
+
+  guideCategories.forEach((category) => {
+    category.addEventListener("click", () => {
+      guideCategories.forEach((item) => item.classList.remove("is-on"));
+      category.classList.add("is-on");
+      showCategory(category.dataset.cat);
+    });
+  });
+
+  if (window.location.hash) {
+    openQuestion(window.location.hash.slice(1));
+  } else {
+    showCategory("product");
+  }
+
+  window.addEventListener("hashchange", () => openQuestion(window.location.hash.slice(1)));
 }
