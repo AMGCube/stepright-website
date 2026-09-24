@@ -175,13 +175,13 @@ if (HERO_SCENES.length && heroImage && heroProduct) {
     if (!scenes.some((scene) => scene.code === code)) {
       return;
     }
-    const actions = card.querySelector(".colour-actions");
+    const footer = card.querySelector(".card-foot");
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "scene-link";
-    button.textContent = "View in room";
+    button.className = "view-room";
+    button.textContent = "View in room →";
     button.addEventListener("click", () => activateScene(code));
-    actions.append(button);
+    footer.append(button);
   });
 
   show(0);
