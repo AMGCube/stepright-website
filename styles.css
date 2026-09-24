@@ -355,6 +355,7 @@ p {
 .intro h2,
 .section-heading h2,
 #how-to-buy h2,
+#our-thinking h2,
 .contact h2 {
   margin-bottom: 18px;
   font-size: 36px;
@@ -400,15 +401,82 @@ p {
   max-width: 440px;
 }
 
-.colour-lead {
-  max-width: 440px;
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 16px;
-}
-
 .colours {
   background: transparent;
+}
+
+.thinking-band {
+  margin: 20px 0 0;
+  background: var(--blue-dark);
+  color: #fff;
+}
+
+.tb-inner {
+  padding: 32px 32px;
+}
+
+.tb-title {
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.tb-sub {
+  max-width: none;
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+}
+
+.tb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.tb-item {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  border-top: 2px solid var(--yellow);
+}
+
+.tb-num {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tb-num small {
+  margin-left: 3px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+}
+
+.tb-label {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tb-b {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tb-all {
+  display: inline-block;
+  margin-top: 30px;
+  border-bottom: 1px solid var(--yellow);
+  padding-bottom: 2px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .spec-inline {
@@ -479,19 +547,33 @@ p {
   line-height: 1.3;
 }
 
-.colour-actions {
+.card-foot {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-  margin: 12px 6px 0;
+  margin: 16px 6px 0;
 }
 
-.stock-link,
-.scene-link {
+.card-foot h3 {
+  margin: 0 0 6px;
+}
+
+.card-foot .colour-name {
+  margin: 0;
+}
+
+.card-foot .view-room {
+  margin: 0 0 0 auto;
+  white-space: nowrap;
   color: var(--blue);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
+}
+
+.card-foot .view-room:hover {
+  text-decoration: underline;
 }
 
 .scene-link {
@@ -511,6 +593,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+  margin-top: 20px;
 }
 
 .step {
@@ -733,6 +816,23 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .tb-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .tb-inner {
+    padding: 26px 20px;
+  }
+
+  .tb-num {
+    font-size: 34px;
+  }
+
+  .tb-title {
+    font-size: 20px;
+  }
+
   .section-heading {
     display: grid;
     align-items: start;
@@ -813,13 +913,10 @@ p {
     margin-bottom: 18px;
   }
 
-  .colour-lead {
-    font-size: 15.5px;
-  }
-
   .intro h2,
   .section-heading h2,
   #how-to-buy h2,
+  #our-thinking h2,
   .contact h2 {
     font-size: 29px;
     line-height: 1.12;
