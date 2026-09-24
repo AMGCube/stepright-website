@@ -200,7 +200,7 @@ if (guideQuestions.length) {
 
   const showCategory = (category) => {
     guideQuestions.forEach((question) => {
-      question.hidden = question.dataset.cat !== category;
+       question.hidden = category !== "all" && question.dataset.cat !== category;
     });
   };
 
@@ -231,7 +231,7 @@ if (guideQuestions.length) {
   if (window.location.hash) {
     openQuestion(window.location.hash.slice(1));
   } else {
-    showCategory("product");
+    showCategory("all");
   }
 
   window.addEventListener("hashchange", () => openQuestion(window.location.hash.slice(1)));
