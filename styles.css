@@ -1,15 +1,15 @@
 :root {
   color-scheme: light;
-  --blue: #355c8a;
-  --blue-dark: #173756;
-  --blue-deep: #082e56;
+  --navy: #082e56;
+  --navy-deep: #061d34;
   --yellow: #f6df20;
+  --link: #0066b7;
   --ink: #182435;
   --muted: #667386;
   --paper: #f4f7fb;
   --surface: #ffffff;
   --line: rgba(24, 36, 53, 0.14);
-  --shadow: 0 24px 70px rgba(8, 46, 86, 0.16);
+  --shadow: 0 24px 70px color-mix(in srgb, var(--navy) 16%, transparent);
   --page: min(1180px, calc(100% - 40px));
 }
 
@@ -60,9 +60,9 @@ button {
   width: min(1180px, calc(100% - 28px));
   transform: translateX(-50%);
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 12px 36px rgba(8, 46, 86, 0.1);
-  color: var(--ink);
+  background: var(--navy);
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--navy) 10%, transparent);
+  color: #fff;
   backdrop-filter: blur(16px);
   transition:
     background 180ms ease,
@@ -72,7 +72,7 @@ button {
 }
 
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--navy);
 }
 
 .brand {
@@ -87,7 +87,7 @@ button {
 }
 
 .brand strong {
-  color: var(--blue-deep);
+  color: var(--yellow);
   font-size: 20px;
   font-weight: 800;
   letter-spacing: 0;
@@ -96,7 +96,7 @@ button {
 
 .brand small {
   margin-top: 3px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -113,6 +113,7 @@ button {
 }
 
 .site-nav a {
+  color: #fff;
   opacity: 0.86;
 }
 
@@ -121,8 +122,15 @@ button {
 }
 
 .nav-cta {
-  border: 1px solid currentColor;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: #fff;
   padding: 9px 16px;
+}
+
+.nav-cta:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
 }
 
 .hero {
@@ -139,9 +147,7 @@ button {
   align-content: center;
   min-height: 500px;
   padding: 52px 42px;
-  background:
-    linear-gradient(135deg, rgba(246, 223, 32, 0.12), transparent 28%),
-    var(--blue-deep);
+  background: var(--navy);
   color: #fff;
 }
 
@@ -169,7 +175,7 @@ button {
 .hero-product-block::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(8, 46, 86, 0.32), transparent 48%);
+  background: linear-gradient(0deg, color-mix(in srgb, var(--navy) 32%, transparent), transparent 48%);
   content: "";
 }
 
@@ -228,7 +234,7 @@ button {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(4px);
-  color: var(--blue-deep);
+  color: var(--navy);
   font-size: 26px;
   line-height: 1;
   opacity: 0.75;
@@ -325,11 +331,11 @@ p {
 
 .button.primary {
   background: var(--yellow);
-  color: var(--blue-deep);
+  color: var(--navy);
 }
 
 .button.primary:hover {
-  background: #fff36c;
+  background: var(--yellow);
 }
 
 .button.secondary {
@@ -375,7 +381,7 @@ p {
 .intro .section-kicker,
 .colours .section-kicker,
 .contact .section-kicker {
-  color: var(--blue);
+  color: var(--link);
 }
 
 .colour-card h3 {
@@ -407,7 +413,7 @@ p {
 
 .thinking-band {
   margin: 20px 0 0;
-  background: #082e56;
+  background: var(--navy);
   color: #fff;
 }
 
@@ -492,7 +498,7 @@ p {
 }
 
 .spec-inline strong {
-  color: var(--blue-deep);
+  color: var(--navy);
 }
 
 .colour-grid {
@@ -521,7 +527,7 @@ p {
 }
 
 .swatch-button:focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--link);
   outline-offset: 2px;
 }
 
@@ -568,7 +574,7 @@ p {
 .card-foot .view-room {
   margin: 0 0 0 auto;
   white-space: nowrap;
-  color: var(--blue);
+  color: var(--link);
   font-size: 12px;
   font-weight: 700;
 }
@@ -604,7 +610,7 @@ p {
 }
 
 .step-label {
-  color: var(--blue);
+  color: var(--link);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -651,7 +657,7 @@ p {
 }
 
 .contact-email a {
-  color: var(--blue);
+  color: var(--link);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -668,7 +674,7 @@ p {
 .dealer-panel {
   display: block;
   border: 1px solid rgba(24, 36, 53, 0.1);
-  border-top: 4px solid var(--blue-deep);
+  border-top: 4px solid var(--navy);
   background: #fff;
   padding: clamp(22px, 3vw, 28px);
 }
@@ -704,13 +710,13 @@ p {
 }
 
 .dealer-map {
-  color: var(--blue-deep);
-  text-decoration-color: rgba(8, 46, 86, 0.28);
+  color: var(--link);
+  text-decoration-color: color-mix(in srgb, var(--navy) 28%, transparent);
   text-underline-offset: 4px;
 }
 
 .dealer-map:hover {
-  color: var(--blue);
+  color: var(--link);
   text-decoration-color: rgba(53, 92, 138, 0.65);
 }
 
@@ -722,7 +728,7 @@ p {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(6, 29, 52, 0.88);
+  background: color-mix(in srgb, var(--navy-deep) 88%, transparent);
 }
 
 .lightbox[hidden] {
@@ -745,7 +751,7 @@ p {
   width: 46px;
   height: 46px;
   border: 1px solid rgba(255, 255, 255, 0.7);
-  background: rgba(8, 46, 86, 0.6);
+  background: color-mix(in srgb, var(--navy) 60%, transparent);
   color: #fff;
   font-size: 26px;
   line-height: 1;
@@ -753,7 +759,7 @@ p {
 }
 
 .lightbox-close:hover {
-  background: rgba(8, 46, 86, 0.9);
+  background: color-mix(in srgb, var(--navy) 90%, transparent);
 }
 
 
@@ -764,7 +770,7 @@ p {
   justify-content: flex-start;
   gap: 18px;
   padding: 25px max(20px, calc((100% - 1180px) / 2));
-  background: #061d34;
+  background: var(--navy-deep);
   color: #fff;
   font-size: 13px;
 }
@@ -782,7 +788,7 @@ p {
 .page-hero {
   width: var(--page);
   margin: 92px auto 0;
-  background: #082e56;
+  background: var(--navy);
   color: #fff;
   padding: 40px;
 }
@@ -837,8 +843,8 @@ p {
 }
 
 .guide-cat.is-on {
-  border-color: var(--blue-dark);
-  background: var(--blue-dark);
+  border-color: var(--navy);
+  background: var(--navy);
   color: #fff;
 }
 
@@ -875,7 +881,7 @@ p {
 
 .q-n {
   padding-top: 3px;
-  color: var(--blue);
+  color: var(--link);
   font-size: 13px;
   font-variant-numeric: tabular-nums;
   font-weight: 800;
@@ -895,7 +901,7 @@ p {
 }
 
 .q-x {
-  color: var(--blue);
+  color: var(--link);
   font-size: 22px;
   line-height: 1;
   text-align: center;
@@ -940,7 +946,7 @@ p {
 }
 
 .q-table tr.hl td {
-  color: var(--blue-deep);
+  color: var(--navy);
   font-weight: 700;
 }
 
